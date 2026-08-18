@@ -20,10 +20,26 @@ https://frcsdk.sapphify.com/SapphifyLib-2027.json
 The JSON is copied into your project's `vendordeps/` folder. Commit it — it is part of your robot
 code, and a teammate cloning the repository needs it.
 
-:::note[Rebuild every 30 days]
+:::caution[Online installs expire — use the offline zip before a competition]
 A vendor dependency installed in online mode caches its artifacts locally, and WPILib clears that
-cache after about 30 days. Connect to the internet and rebuild before your competition, not at it.
+cache after about 30 days. A team that installs in October and arrives at a March competition with
+no venue internet has a robot that will not build.
 :::
+
+## Offline installation
+
+Download `SapphifyLib-offline-2027.0.0-alpha-1.zip` and extract it into the **root of your WPILib
+year directory**:
+
+| | |
+|---|---|
+| Linux and macOS | `~/wpilib/2027_alpha5` |
+| Windows | `C:\Users\Public\wpilib\2027_alpha5` |
+
+The archive carries `maven/` and `vendordeps/`, which is exactly the layout WPILib looks for. Then
+add `vendordeps/SapphifyLib.json` to your robot project, or copy it in directly.
+
+This needs no internet connection and does not expire. Do it before you travel.
 
 ## Why this URL never changes
 

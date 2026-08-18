@@ -1,0 +1,43 @@
+---
+title: SAPPHIFY
+description: Documentation for SAPPHIFY FRC CAN devices — SapphifyLib, the published CAN protocol, and ROTEM.
+template: splash
+hero:
+  tagline: Open CAN FD devices for FIRST Robotics Competition. One library, one published protocol, tooling that runs on Linux.
+  actions:
+    - text: Install the library
+      link: /getting-started/installation/
+      icon: right-arrow
+    - text: Read the CAN protocol
+      link: https://github.com/SapphifyRobotics/sapphify-can-spec
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+:::caution[Pre-alpha]
+The hardware is a routed first-article design and the library has no CAN transport bound to it
+yet, so nothing here talks to a real device. No performance figure is claimed until it has been
+measured and the method published alongside it.
+:::
+
+<CardGrid stagger>
+  <Card title="One library, every device" icon="puzzle">
+    Install `SapphifyLib` once. Every SAPPHIFY device you buy afterwards is already supported —
+    no second vendordep, no second tool, no second set of habits.
+  </Card>
+  <Card title="It tells you when it is wrong" icon="warning">
+    Yaw uncertainty from the filter covariance, live bias estimate, vibration level, magnetic
+    disturbance state and calibration age are signals on the bus, surfaced through the WPILib
+    Alert API.
+  </Card>
+  <Card title="The protocol is published" icon="open-book">
+    Every frame, field, scaling and status bit. Write your own driver, replay your own logs, or
+    integrate a non-WPILib stack — no SAPPHIFY software required.
+  </Card>
+  <Card title="Nothing throws" icon="approve-check">
+    A device on a CAN bus can legitimately vanish mid-match. Reads return a signal carrying a
+    status code, and every status code documents its remedy.
+  </Card>
+</CardGrid>

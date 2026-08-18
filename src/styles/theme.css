@@ -1,0 +1,14 @@
+/* Sapphire accent, tuned so both themes hit WCAG AA on body text. */
+:root {
+  --sl-color-accent-low: #10243e;
+  --sl-color-accent: #2563eb;
+  --sl-color-accent-high: #b3c7ff;
+  --sl-content-width: 48rem;
+}
+:root[data-theme='light'] {
+  --sl-color-accent-low: #c7d7ff;
+  --sl-color-accent: #1d4ed8;
+  --sl-color-accent-high: #182a4e;
+}
+/* Status tables read better with the first column tight and monospaced. */
+.sl-markdown-content table code { white-space: nowrap; }

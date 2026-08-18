@@ -22,6 +22,41 @@ and it reports how much it trusts that orientation.
 
 USB-C does not power the board. Main input is required; VBUS is protected sense only.
 
+## Wiring, and the rules that constrain it
+
+These are not suggestions. Each one maps to a rule an inspector checks.
+
+**Power it from the Power Distribution hub, on a small fuse.** R610 requires every circuit to be
+powered solely by a single protected connector pair of the PD. R622 then sizes wire by the
+*protective device*, not by what the board draws — on a 40 A channel it would demand 12 AWG.
+The exemption is explicit: manufacturer-supplied wires are legal "provided they are powered by the
+smallest value fuse or breaker which permits proper device operation."
+
+| | |
+|---|---|
+| Required protection | **2 A ATM fuse** (or the smallest available that holds) |
+| Supplied pigtail | 24 AWG power pair, 28 AWG CAN pair |
+| Draw | 200 mA at 5 V design ceiling; 180 mA expected |
+
+Quote that fuse value to your inspector. Without it, a board on a 40 A channel is technically
+non-compliant no matter how little current it draws.
+
+**Wire colours.** R624 requires the positive lead to be red, yellow, white, brown or
+black-with-stripe, and the negative black or blue, on all non-signal wiring. The supplied pigtail
+already complies. CAN is signal level and exempt, but the WPILib convention is yellow for CAN-H
+and green for CAN-L — follow it.
+
+**Frame isolation.** R611 requires greater than 120 Ω between either battery post and any point on
+the robot frame, and it names sensors with grounded enclosures as a common failure. **All four M3
+mounting holes on ROTEM are isolated from copper** — no ground plane, no stitching, nothing. You
+can bolt it to a metal chassis with metal hardware and stay compliant.
+
+**Termination.** R716 permits a device to sit inline on the bus and forbids anything that
+interferes with, alters or blocks communication. ROTEM daisy-chains and does neither. Close both
+termination jumpers **only** if the module is at a physical end of the bus — in the standard
+topology the roboRIO and the PD already terminate it, and adding a third terminator will break the
+bus.
+
 ## Status lights
 
 Two RGB indicators. SYS reports the device, CAN reports the bus.

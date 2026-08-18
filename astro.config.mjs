@@ -2,10 +2,10 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  site: 'https://docs.sapphify.com',
+  site: 'https://frc.sapphify.com',
   integrations: [
     starlight({
-      title: 'SAPPHIFY Docs',
+      title: 'SAPPHIFY FRC',
       description:
         'Documentation for SAPPHIFY FRC CAN devices: SapphifyLib, the published CAN protocol, and the ROTEM attitude and heading reference.',
       customCss: ['./src/styles/theme.css'],

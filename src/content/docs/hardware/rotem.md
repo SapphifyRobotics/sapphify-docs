@@ -22,6 +22,38 @@ and it reports how much it trusts that orientation.
 
 USB-C does not power the board. Main input is required; VBUS is protected sense only.
 
+## Where the sensors actually are
+
+This matters for odometry: the mounting holes and the gyro are not the same point.
+
+| Reference | Position |
+|---|---|
+| Board outline | 50.000 × 50.000 mm |
+| M3 mounting holes | (6, 6), (44, 6), (6, 44), (44, 44) — 38 mm square pattern |
+| Centroid of the four holes | exact board centre |
+| **MMC5983MA magnetometer** | at the centroid, offset **0.00 mm** |
+| **ICM-45686 IMU** | **7.00 mm along board +X** from the centroid |
+
+The magnetometer sits dead centre because centre is the point furthest from the connectors, the
+switching inductor and the CAN return currents — it is the sensor that cares about its magnetic
+surroundings. The IMU sits 7.00 mm away on the +X axis, toward the reset-switch edge, marked by
+the X/Y/Z silkscreen beside the sensors.
+
+If you place the IMU in your robot's pose model, use the hole pattern as your datum and add the
+7.00 mm offset along the board's +X axis. Ignoring it puts your gyro 7 mm from where your code
+thinks it is.
+
+:::note[What the offset costs, and why it is bounded]
+Rotating in place gives the IMU a lever arm, so it sees centripetal acceleration that is not
+gravity: at 720°/s — ordinary for a swerve robot — that is ω²r ≈ 1.1 m/s², about 0.11 g.
+
+The estimator already handles this. Gravity corrections are accepted only when motion is
+quasi-static, and a hard rotation fails that gate, so the accelerometer is not consulted while the
+lever arm matters. The practical effect is that during aggressive rotation the filter leans harder
+on gyro integration — which is what the per-unit scale-factor calibration exists to make
+trustworthy.
+:::
+
 ## Wiring, and the rules that constrain it
 
 These are not suggestions. Each one maps to a rule an inspector checks.

@@ -1,6 +1,6 @@
 # SAPPHIFY documentation
 
-The documentation site for SAPPHIFY FRC CAN devices — [docs.sapphify.com](https://docs.sapphify.com).
+The documentation site for SAPPHIFY FRC CAN devices — [frc.sapphify.com](https://frc.sapphify.com).
 
 Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build).
 
@@ -9,6 +9,11 @@ npm install
 npm run dev      # local preview
 npm run build    # static output in dist/
 ```
+
+The whole host is the FRC product line: the splash page at the root doubles as the landing page,
+and the documentation lives underneath it. There is deliberately no `docs.` subdomain — Cloudflare's
+free Universal SSL certificate covers only one level of subdomain, so grouping under a second level
+would have cost an Advanced Certificate Manager subscription for no benefit.
 
 ## Why this exists as its own site
 

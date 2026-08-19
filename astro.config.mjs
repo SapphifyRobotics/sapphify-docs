@@ -38,6 +38,7 @@ export default defineConfig({
             { label: 'Status codes', slug: 'api/status-codes' },
             { label: 'Configuration', slug: 'api/configuration' },
             { label: 'Diagnostics and alerts', slug: 'api/diagnostics' },
+            { label: 'WPILib integration', slug: 'api/wpilib' },
           ],
         },
         {
